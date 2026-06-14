@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="te">
 <head>
     <meta charset="UTF-8">
@@ -29,65 +29,116 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 3D Glassmorphism Card Effect */
         .card { 
-            background: rgba(255, 255, 255, 0.85); 
+            background: rgba(255, 255, 255, 0.88); 
             max-width: 550px; 
             width: 100%; 
             padding: 35px; 
             border-radius: 24px; 
-            box-shadow: 0px 20px 40px rgba(0,0,0,0.15), inset 0px 1px 3px rgba(255,255,255,0.5); 
-            margin: 20px auto; 
+            box-shadow: 0px 20px 40px rgba(0,0,0,0.15); 
             position: relative; 
             z-index: 10; 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.4);
-            transform: perspective(1000px) rotateX(2deg);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+            animation: popIn 0.5s ease-out;
         }
 
-        h1 { 
-            color: #d63384; 
-            font-size: 26px; 
-            margin-bottom: 25px; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
-        p { font-size: 19px; line-height: 1.6; color: #444; font-weight: 600; }
-        
-        .options-grid { display: block; margin-top: 25px; }
-        
-        /* 3D Dynamic Buttons */
-        .option-btn { 
-            background: linear-gradient(135deg, #ffffff, #fff0f5); 
-            color: #d63384; 
-            border: none;
-            padding: 16px; 
-            width: 100%; 
-            margin-bottom: 15px; 
-            font-size: 18px; 
-            border-radius: 16px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            text-align: center; 
-            box-shadow: 0px 6px 0px #f0b4d4, 0px 8px 15px rgba(0,0,0,0.1);
-            transition: all 0.1s ease;
+
+        .hidden { display: none !important; }
+
+        /* --- STEP 1: 3D GIFT BOX & RIBBON CSS --- */
+        .gift-container {
+            cursor: pointer;
             position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
+            perspective: 600px;
         }
-        .option-btn:active {
-            box-shadow: 0px 2px 0px #f0b4d4, 0px 4px 6px rgba(0,0,0,0.1);
-            transform: translateY(4px);
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            background: #ff4d6d;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease;
         }
-        .option-btn:hover {
-            background: linear-gradient(135deg, #fff0f5, #ffe6e6);
+        /* Ribbon Horizontal & Vertical */
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            background: #ffb3d9;
+            width: 30px;
+            height: 100%;
+            left: 85px;
+            top: 0;
+            border-radius: 4px;
+        }
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            background: #ffb3d9;
+            width: 100%;
+            height: 30px;
+            top: 85px;
+            left: 0;
+            border-radius: 4px;
+        }
+        /* Ribbon Bow (Top Knot) */
+        .bow {
+            position: absolute;
+            top: -25px;
+            left: 70px;
+            width: 60px;
+            height: 30px;
+            background: #ffb3d9;
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .hidden { display: none; }
-        #feedback { font-weight: bold; font-size: 20px; margin-top: 20px; min-height: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+        /* --- STEP 2: FLOWER BOUQUET CSS --- */
+        .bouquet-icon {
+            font-size: 100px;
+            animation: floatBouquet 3s ease-in-out infinite;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        @keyframes floatBouquet {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .action-btn {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+        }
+        .action-btn:active {
+            transform: translateY(1px);
+        }
 
-        /* 3D Pop Slideshow Frame */
+        /* --- STEP 3: MAIN SURPRISE & SLIDESHOW CSS --- */
         .slideshow-container { 
             max-width: 100%; 
             position: relative; 
@@ -95,8 +146,8 @@
             border-radius: 18px; 
             overflow: hidden; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-            height: 320px; 
-            border: 4px solid white;
+            height: 340px; 
+            border: 5px solid white;
         }
         .mySlides { display: none; width: 100%; height: 100%; }
         .mySlides img { width: 100%; height: 100%; object-fit: cover; }
@@ -113,12 +164,11 @@
             line-height: 1.7; 
             color: #444; 
             margin-top: 25px; 
-            max-height: 300px; 
+            max-height: 320px; 
             overflow-y: auto; 
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
         }
-        
-        /* Floating 3D Hearts Animation */
+
+        /* Floating 3D Hearts Engine */
         .heart { 
             position: absolute; 
             pointer-events: none; 
@@ -139,22 +189,38 @@
 
     <div id="hearts-container"></div>
 
-    <!-- QUIZ CARD -->
-    <div id="quiz-card" class="card">
-        <h1 id="qn-title">Question 1 of 3</h1>
-        <p id="qn-text">Whats ur good name?</p>
-        <div id="options-box" class="options-grid"></div>
-        <p id="feedback"></p>
+    <!-- STEP 1: GIFT CUTTING SCREEN -->
+    <div id="step1-card" class="card">
+        <h1 style="color: #ff4d6d;">Hey Rishi Akka! 🎁</h1>
+        <p>Neekosam oka special surprise package vachindi! Open cheyadanki kinda unna gift box ribbon paina click chey!</p>
+        <div class="gift-container" onclick="openGift()">
+            <div class="bow"></div>
+            <div class="gift-box"></div>
+        </div>
+        <p style="font-weight: bold; color: #ff758f; animation: bounce 1.5s infinite;">Tap to Cut Ribbon & Open! ✨</p>
     </div>
 
-    <!-- SURPRISE CARD -->
+    <!-- STEP 2: FLOWER BOUQUET SCREEN -->
+    <div id="step2-card" class="card hidden">
+        <h1>A Gift For You! 💐</h1>
+        <p>Mundhuga eeee andhamaina digital flower bouquet tesuko! ❤️</p>
+        <div class="bouquet-icon">💐🌹🌷</div>
+        <br>
+        <button class="action-btn" onclick="showSurprise()">See My Surprise ✨</button>
+    </div>
+
+    <!-- STEP 3: MAIN BIRTHDAY SURPRISE -->
     <div id="surprise-card" class="card hidden">
         <h1>🎉 Happy Birthday, Rishi Akka! 🎂</h1>
+        
+        <!-- Image Loop Slideshow -->
         <div class="slideshow-container">
             <div class="mySlides"><img src="akka1.jpg" alt="Rishi Akka 1"></div>
             <div class="mySlides"><img src="akka2.jpg" alt="Rishi Akka 2"></div>
             <div class="mySlides"><img src="akka3.jpg" alt="Rishi Akka 3"></div>
         </div>
+
+        <!-- Special Sibling Message -->
         <div class="message">
 Happy Birthday, Rishi Akka ❤️
 
@@ -168,78 +234,49 @@ I am truly lucky to have a sister like you. I pray that your life is filled with
 
 Happy Birthday, Akka! Love you always and forever ❤️🎂
         </div>
+        
         <p style="font-size: 32px; margin-top: 25px; margin-bottom: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">🎈🎁👑🌟❤️</p>
     </div>
 
     <script>
-        const quizData = [
-            {
-                text: "Whats ur good name?",
-                options: ["Cutie Rishi", "Potti Rishi", "Smart Rishi", "Intelligent Rishi"],
-                feedbackText: "Correct! All names perfectly suit you! 😍"
-            },
-            {
-                text: "How ur brother looks? 😎",
-                options: ["Comedy", "Hero Material", "Boring", "Cunning"],
-                feedbackText: "Correct! Sibling sentiment op! 🔥😂"
-            },
-            {
-                text: "Nik job oste nakem istav? 🤔🎁",
-                options: ["iPhone", "Dresses", "Evrymonth money", "Laptop chalu"],
-                feedbackText: "Correct Choice! Advanced thanks for the gift! 🎉"
-            }
-        ];
-
-        let currentQn = 0;
-
-        function loadQuestion() {
-            document.getElementById("feedback").innerText = "";
-            if (currentQn >= quizData.length) { showSurprise(); return; }
-            document.getElementById("qn-title").innerText = `Question ${currentQn + 1} of ${quizData.length}`;
-            document.getElementById("qn-text").innerText = quizData[currentQn].text;
-            const optionsBox = document.getElementById("options-box");
-            optionsBox.innerHTML = "";
-            quizData[currentQn].options.forEach(opt => {
-                const btn = document.createElement("button");
-                btn.className = "option-btn";
-                btn.innerText = opt;
-                btn.onclick = () => handleAnswer(btn);
-                optionsBox.appendChild(btn);
-            });
+        // Transition functions
+        function openGift() {
+            // Animating the gift box shrink-pop effect before closing
+            document.querySelector('.gift-box').style.transform = 'scale(1.1) rotate(5deg)';
+            setTimeout(() => {
+                document.getElementById('step1-card').classList.add('hidden');
+                document.getElementById('step2-card').classList.remove('hidden');
+            }, 400);
         }
 
-        function handleAnswer(clickedBtn) {
-            const current = quizData[currentQn];
-            const feedback = document.getElementById("feedback");
-            
-            // Absolute validation override - any option is absolute truth
-            feedback.innerText = current.feedbackText;
-            feedback.style.color = "#28a745";
-            
-            disableButtons();
-            setTimeout(() => { currentQn++; loadQuestion(); }, 1800);
+        function showSurprise() {
+            document.getElementById('step2-card').classList.add('hidden');
+            document.getElementById('surprise-card').classList.remove('hidden');
+            startSlideshow();
         }
 
-        function disableButtons() { const btns = document.querySelectorAll(".option-btn"); btns.forEach(b => b.disabled = true); }
-        function showSurprise() { document.getElementById("quiz-card").classList.add("hidden"); document.getElementById("surprise-card").classList.remove("hidden"); startSlideshow(); }
-        
+        // Automatic Photo Slideshow Logic
         let slideIndex = 0;
         function startSlideshow() {
-            let i; let slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-            slideIndex++; if (slideIndex > slides.length) {slideIndex = 1}    
+            let i; 
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) { 
+                slides[i].style.display = "none"; 
+            }
+            slideIndex++; 
+            if (slideIndex > slides.length) { slideIndex = 1; }    
             slides[slideIndex-1].style.display = "block";  
-            setTimeout(startSlideshow, 3000);
+            setTimeout(startSlideshow, 3000); // Cycles every 3 seconds
         }
 
-        // High-Density 3D Floating Hearts Engine
+        // Floating 3D Hearts Background Particle System
         function createHeart() {
             const container = document.getElementById("hearts-container");
             const heart = document.createElement("div");
             heart.className = "heart"; 
             heart.innerHTML = "❤️";
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s"; // Faster dynamic float up
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s"; 
             heart.style.fontSize = Math.random() * 20 + 15 + "px";
             
             const colors = ["#ff4d6d", "#ff758f", "#ff8fa3", "#ffccd5", "#c9184a", "#ff0a54"];
@@ -247,9 +284,7 @@ Happy Birthday, Akka! Love you always and forever ❤️🎂
             container.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 5000);
         }
-        setInterval(createHeart, 200); // Higher frequency generation
-        
-        loadQuestion();
+        setInterval(createHeart, 200); // Continuous generation matrix stream
     </script>
 </body>
 </html>
